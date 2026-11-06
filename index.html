@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSM Shoes | Premium Footwear</title>
+    
+    <!-- Google Fonts: Cinzel & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= VARIABLES & RESET ================= */
+        :root {
+            --primary-bg: #FFFFFF;
+            --text-dark: #111111;
+            --accent-color: #A67B5B; /* Warm Leather Brown */
+            --light-grey: #F9F9F9;
+            --border-color: #EAEAEA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* ================= ANNOUNCEMENT BAR ================= */
+        .announcement-bar {
+            background-color: var(--text-dark);
+            color: #fff;
+            text-align: center;
+            padding: 8px 15px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ================= HEADER ================= */
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: var(--primary-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            transition: all 0.3s ease;
+        }
+
+        /* Logo */
+        .logo-container {
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        @media (min-width: 992px) {
+            .logo-container { justify-content: flex-start; flex-grow: 0; }
+        }
+        .logo-container a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--text-dark);
+            line-height: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .logo-subtext {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 6px;
+            color: var(--accent-color);
+            margin-top: 4px;
+            margin-left: 6px;
+            display: block;
+        }
+
+        /* PC Navigation */
+        .pc-nav {
+            display: none;
+        }
+        @media (min-width: 992px) {
+            .pc-nav {
+                display: flex;
+                gap: 30px;
+            }
+            .pc-nav a {
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                position: relative;
+                transition: color 0.3s;
+            }
+            .pc-nav a:hover {
+                color: var(--accent-color);
+            }
+            .pc-nav a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -5px;
+                left: 0;
+                background-color: var(--accent-color);
+                transition: width 0.3s;
+            }
+            .pc-nav a:hover::after {
+                width: 100%;
+            }
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .icon-btn {
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: color 0.3s;
+        }
+        .icon-btn:hover {
+            color: var(--accent-color);
+        }
+        .menu-btn {
+            font-size: 22px;
+            cursor: pointer;
+            display: block;
+        }
+        @media (min-width: 992px) {
+            .menu-btn { display: none; }
+        }
+        .cart-icon-container {
+            position: relative;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: #fff;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /* ================= SEARCH DROPDOWN ================= */
+        .search-container {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-bg);
+            padding: 20px 5%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            transform: translateY(-150%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 999;
+            visibility: hidden;
+        }
+        .search-container.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            font-size: 14px;
+            outline: none;
+        }
+        .search-box button {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* ================= SLIDING DRAWERS ================= */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+        }
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--primary-bg);
+            z-index: 1002;
+            padding: 30px 20px;
+            transition: 0.4s ease-in-out;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        .mobile-menu.active {
+            left: 0;
+        }
+        .close-menu {
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            text-align: right;
+            display: block;
+        }
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .mobile-nav-links a {
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 320px;
+            height: 100vh;
+            background-color: var(--primary-bg);
+            z-index: 1002;
+            padding: 20px;
+            transition: 0.4s ease-in-out;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-drawer.active {
+            right: 0;
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .cart-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .close-cart {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .cart-body {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+        .cart-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--text-dark);
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+        .checkout-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* ================= 16:9 FADE SLIDER WITH DOTS ================= */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9; /* Perfect 16:9 aspect ratio */
+            background-color: var(--light-grey);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out; /* Smooth fade effect */
+            background-size: 100% 100%; /* Keep full image without cropping */
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Dots Styling */
+        .slider-dots {
+            position: absolute;
+            bottom: 20px; /* Distance from bottom */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color); /* Brown outline */
+            background-color: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--accent-color); /* Filled with Brown */
+            transform: scale(1.2); /* Thora sa bada ho jayega active dot */
+        }
+        /* ================= PART 2 CSS ================= */
+        
+        /* --- 1. CONTINUOUS MOVING CATEGORY CIRCLES --- */
+        .category-section {
+            background-color: var(--primary-bg);
+            padding: 30px 0;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .marquee-wrapper {
+            display: flex;
+            width: 200%; /* For continuous loop */
+            animation: scrollCategories 20s linear infinite;
+        }
+        .marquee-wrapper:hover {
+            animation-play-state: paused; /* Hover karne par ruk jayega */
+        }
+        .category-item {
+            flex: 1 0 auto;
+            width: 90px; /* Pehle 120px tha, ab space kam kar di hai */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+        .category-circle {
+            width: 70px; /* Pehle 90px tha, ab chota kar diya hai */
+            height: 70px; /* Height bhi proportional choti kar di */
+            border-radius: 50%;
+            background-color: var(--light-grey);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+        .category-item:hover .category-circle {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        .category-title {
+            font-size: 11px; /* Font size thora sa adjust kiya hai chotay circle ke hisab se */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+        .category-item:hover .category-circle {
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        .category-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+        }
+        
+        @keyframes scrollCategories {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- 2. PRODUCT GRIDS (FEATURED & NEW ARRIVALS) --- */
+        .products-section {
+            padding: 60px 5%;
+            background-color: var(--primary-bg);
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+        }
+        .section-subtitle {
+            font-size: 12px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+        
+        /* 4 in PC, 2 in Mobile */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        @media (min-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+            }
+        }
+        
+        /* Premium Product Card */
+        .product-card {
+            background-color: var(--primary-bg);
+            text-align: left;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-image-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Exactly Square Image */
+            background-color: var(--light-grey);
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .product-image-box img {
+            transform: scale(1.08); /* Halka sa zoom on hover */
+        }
+        
+        /* Badges matching your reference */
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: var(--text-dark);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 5px 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+        .badge.accent { background-color: var(--accent-color); }
+        .badge.sale { background-color: #D9534F; }
+        
+        .product-info {
+            padding: 0 5px;
+        }
+        .product-subtitle {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .product-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .product-stars {
+            color: #F5A623;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+        .product-stars span { color: #888; margin-left: 5px; }
+        
+        .product-price-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .current-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .old-price {
+            font-size: 13px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            border: 1px solid var(--text-dark);
+            color: var(--text-dark);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .add-to-cart-btn:hover {
+            background-color: var(--text-dark);
+            color: #fff;
+        }
+
+        /* --- 3. PROMO BANNERS SECTION --- */
+        .promo-section {
+            padding: 20px 5%;
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile: Upar neeche */
+            gap: 15px;
+        }
+        @media (min-width: 992px) {
+            .promo-section {
+                grid-template-columns: repeat(2, 1fr); /* PC: Left & Right */
+                gap: 30px;
+            }
+        }
+        .promo-banner {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: var(--light-grey);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3); /* Dark overlay for text visibility */
+        }
+        .promo-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+        }
+        .promo-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .promo-btn {
+            background-color: #fff;
+            color: var(--text-dark);
+            padding: 8px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .promo-btn:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+        /* ================= PART 3 CSS ================= */
+        
+        /* --- 1. BRAND STORY SECTION (BROWN BACKGROUND) --- */
+        .brand-story-section {
+            padding: 80px 5%;
+            background-color: var(--accent-color); /* Premium Leather Brown Background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        @media (min-width: 992px) {
+            .brand-story-section {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 100px 8%;
+            }
+        }
+        .story-image-container {
+            width: 100%;
+            position: relative;
+        }
+        @media (min-width: 992px) {
+            .story-image-container {
+                width: 48%;
+            }
+        }
+        .story-image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Thoda dark shadow */
+        }
+        
+        /* Premium Overlapping Box */
+        .experience-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background-color: var(--text-dark); /* Matte Black */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid var(--accent-color); /* Seamless blending with background */
+            display: none; 
+        }
+        @media (min-width: 992px) {
+            .experience-badge { display: block; }
+        }
+        .experience-badge h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            color: #fff; /* White text for black badge */
+        }
+        .experience-badge p {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ccc;
+        }
+
+        .story-content {
+            width: 100%;
+            text-align: center;
+        }
+        @media (min-width: 992px) {
+            .story-content {
+                width: 45%;
+                text-align: left;
+            }
+        }
+        .story-subtitle {
+            font-size: 12px;
+            color: var(--text-dark); /* Black text on Brown background */
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 700;
+        }
+        .story-title {
+            font-family: 'Cinzel', serif;
+            font-size: 36px;
+            color: #ffffff; /* Crisp White title */
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .story-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9); /* Off-white for easy reading */
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .story-btn {
+            display: inline-block;
+            background-color: var(--text-dark); /* Matte Black Button */
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--text-dark);
+        }
+        .story-btn:hover {
+            background-color: #ffffff;
+            color: var(--text-dark);
+            border-color: #ffffff;
+        }
+
+        /* --- 2. TRUST BADGES SECTION --- */
+        .trust-badges-section {
+            background-color: var(--primary-bg);
+            padding: 60px 5%;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Mobile: 2x2 */
+            gap: 30px;
+            text-align: center;
+        }
+        @media (min-width: 992px) {
+            .badges-grid {
+                grid-template-columns: repeat(4, 1fr); /* PC: 1x4 straight line */
+            }
+        }
+        .badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+        .badge-item:hover {
+            transform: translateY(-5px);
+        }
+        .badge-icon {
+            font-size: 32px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        .badge-item:hover .badge-icon {
+            color: var(--accent-color);
+        }
+        .badge-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .badge-text {
+            font-size: 11px;
+            color: #888;
+            line-height: 1.5;
+        }
+        /* ================= PART 4 CSS ================= */
+        
+        /* --- 1. TESTIMONIALS SECTION (Wahi Purani) --- */
+        .testimonials-section {
+            padding: 80px 5%;
+            background-color: var(--light-grey);
+            text-align: center;
+        }
+        .testi-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        @media (min-width: 992px) {
+            .testi-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+        }
+        .testi-card {
+            background-color: var(--primary-bg);
+            padding: 40px 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+        .testi-card:hover {
+            transform: translateY(-5px);
+        }
+        .quote-icon {
+            font-size: 24px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        .testi-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .testi-author {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .testi-stars {
+            color: #F5A623;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        /* --- 2. THE MSM PHILOSOPHY (BROWN BACKGROUND) --- */
+        .philosophy-section {
+            padding: 100px 5%;
+            background-color: var(--accent-color); /* Premium Leather Brown Background */
+            color: #fff;
+        }
+        .philosophy-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .philosophy-header .section-subtitle {
+            color: var(--text-dark); /* Black subtitle on brown */
+            font-weight: 700;
+        }
+        .philosophy-header .section-title {
+            color: #fff; /* Crisp White title on brown background */
+        }
+        
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile: 1 column */
+            gap: 30px;
+        }
+        @media (min-width: 992px) {
+            .philosophy-grid {
+                grid-template-columns: repeat(3, 1fr); /* PC: 3 columns */
+            }
+        }
+        
+        /* Matte Black Cards on Brown Background */
+        .philosophy-card {
+            position: relative;
+            padding: 40px 30px;
+            border: 1px solid var(--text-dark);
+            background: linear-gradient(145deg, #1a1a1a, #111111); /* Matte Black */
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: default;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Soft shadow for depth */
+        }
+        .philosophy-card:hover {
+            border-color: #fff; /* White border glow on hover */
+            transform: translateY(-5px);
+        }
+        
+        /* Large Background Graphic Number (Faint White) */
+        .bg-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-family: 'Cinzel', serif;
+            font-size: 120px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.04); /* Very faint white */
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+        .philosophy-card:hover .bg-number {
+            color: rgba(255, 255, 255, 0.1); /* Visible white on hover */
+        }
+        
+        .philosophy-content {
+            position: relative;
+            z-index: 2;
+        }
+        .philosophy-icon {
+            font-size: 32px;
+            color: var(--accent-color); /* Brown Icon pops on Black card */
+            margin-bottom: 25px;
+            transition: color 0.3s ease;
+        }
+        .philosophy-card:hover .philosophy-icon {
+            color: #fff; /* Turns white on hover */
+        }
+        .philosophy-title {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .philosophy-desc {
+            font-size: 13px;
+            color: #bbb;
+            line-height: 1.7;
+        }
+        .philosophy-divider {
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .philosophy-card:hover .philosophy-divider {
+            width: 80px; /* Line grows on hover */
+            background-color: #fff;
+        }
+
+        /* ================= PART 5 CSS ================= */
+        
+        /* --- 1. NEWSLETTER SECTION --- */
+        .newsletter-section {
+            padding: 70px 5%;
+            background-color: var(--light-grey);
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .newsletter-title {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        .newsletter-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 15px 20px;
+            font-size: 13px;
+            border: 1px solid var(--text-dark);
+            outline: none;
+            background-color: transparent;
+        }
+        .newsletter-btn {
+            padding: 15px 30px;
+            background-color: var(--text-dark);
+            color: #fff;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .newsletter-btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* --- 2. PREMIUM FOOTER --- */
+        .footer {
+            background-color: var(--text-dark); /* Matte Black */
+            color: #fff;
+            padding: 70px 5% 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile: 1 column */
+            gap: 40px;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+            }
+        }
+        @media (min-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr); /* PC: 4 columns */
+                gap: 30px;
+            }
+        }
+        
+        /* Footer Columns */
+        .footer-logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .footer-logo-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 8px;
+            font-weight: 600;
+            letter-spacing: 6px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .footer-about {
+            font-size: 12px;
+            color: #999;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 16px;
+            width: 35px;
+            height: 35px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .footer-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #bbb;
+            font-size: 13px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #fff;
+            padding-left: 5px; /* Slight move on hover */
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #bbb;
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .contact-info i {
+            color: var(--accent-color);
+            margin-top: 3px;
+        }
+
+        /* Footer Bottom Bar */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+        .copyright {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+        .payment-icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        /* Styling text-based local payment badges */
+        .pay-badge {
+            background-color: #222;
+            color: #aaa;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 3px;
+            border: 1px solid #333;
+            letter-spacing: 0.5px;
+        }
+        .payment-icons i {
+            font-size: 24px;
+            color: #aaa;
+        }
+        /* ================= CONTACT US SECTION CSS ================= */
+        .contact-section {
+            padding: 80px 5%;
+            background-color: var(--primary-bg);
+            border-top: 1px solid var(--border-color);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        @media (min-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1fr; /* PC: 2 columns (Info & Form) */
+                gap: 60px;
+            }
+        }
+        
+        /* Left: Contact Info Box */
+        .contact-info-box {
+            background-color: var(--light-grey);
+            padding: 40px;
+            border-left: 4px solid var(--accent-color);
+        }
+        .contact-info-title {
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        .contact-info-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        .contact-detail-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--text-dark);
+        }
+        .contact-detail-list i {
+            font-size: 16px;
+            color: var(--accent-color);
+            margin-top: 3px;
+        }
+
+        /* Right: Contact Form */
+        .contact-form-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+            background-color: var(--light-grey);
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--accent-color);
+        }
+        .form-textarea {
+            resize: vertical;
+            height: 130px;
+        }
+        .submit-btn {
+            background-color: var(--text-dark);
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+        }
+        .submit-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 1. ANNOUNCEMENT BAR -->
+    <div class="announcement-bar">
+        Premium Quality Leather | Free Shipping Over Rs. 5000
+    </div>
+
+    <!-- 2. HEADER -->
+    <header class="header">
+        
+        <i class="fa-solid fa-bars menu-btn" onclick="toggleMenu()"></i>
+
+        <div class="logo-container">
+            <a href="#">
+                <div class="logo-text">MSM</div>
+                <div class="logo-subtext">PREMIUM SHOES</div>
+            </a>
+        </div>
+
+        <ul class="pc-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Sneakers</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="header-icons">
+            <i class="fa-solid fa-magnifying-glass icon-btn" onclick="toggleSearch()"></i>
+            <div class="cart-icon-container" onclick="toggleCart()">
+                <i class="fa-solid fa-bag-shopping icon-btn"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+
+        <div class="search-container" id="searchBar">
+            <div class="search-box">
+                <input type="text" placeholder="Search for premium shoes...">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overlay -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeAllDrawers()"></div>
+
+    <!-- 3. MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <i class="fa-solid fa-xmark close-menu" onclick="toggleMenu()"></i>
+        <ul class="mobile-nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Men's Collection</a></li>
+            <li><a href="#">Women's Collection</a></li>
+            <li><a href="#">Premium Sneakers</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- 4. SLIDING CART -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <i class="fa-solid fa-xmark close-cart" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-body">
+            <p>Your cart is currently empty.</p>
+        </div>
+        <div class="cart-footer">
+            <button class="checkout-btn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- 5. 16:9 HERO SLIDER (FADE WITH DOTS) -->
+    <section class="hero-section">
+        <!-- Banner Images -->
+        <div class="slide active" style="background-image: url('media/banner_3.webp');"></div>
+        <div class="slide" style="background-image: url('media/banner_2.webp');"></div>
+        <div class="slide" style="background-image: url('media/banner_1.webp');"></div>
+        
+        <!-- Navigation Dots -->
+        <div class="slider-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+    </section>
+    <!-- ================= PART 2 START ================= -->
+
+    <!-- 1. MOVING CATEGORY CIRCLES -->
+    <section class="category-section">
+        <div class="marquee-wrapper">
+            <!-- Set 1 (Original) -->
+            <div class="category-item"><img src="media/cat-1.webp" alt="Sneakers" class="category-circle"><span class="category-title">Sneakers</span></div>
+            <div class="category-item"><img src="media/cat-2.webp" alt="Formals" class="category-circle"><span class="category-title">Formals</span></div>
+            <div class="category-item"><img src="media/cat-3.webp" alt="Loafers" class="category-circle"><span class="category-title">Loafers</span></div>
+            <div class="category-item"><img src="media/cat-4.webp" alt="Suede" class="category-circle"><span class="category-title">Suede</span></div>
+            <div class="category-item"><img src="media/cat-5.webp" alt="Limited" class="category-circle"><span class="category-title">Limited</span></div>
+            <div class="category-item"><img src="media/cat-6.webp" alt="Sports" class="category-circle"><span class="category-title">Sports</span></div>
+            
+            <!-- Set 2 (Duplicate for continuous smooth scrolling) -->
+            <div class="category-item"><img src="media/cat-1.webp" alt="Sneakers" class="category-circle"><span class="category-title">Sneakers</span></div>
+            <div class="category-item"><img src="media/cat-2.webp" alt="Formals" class="category-circle"><span class="category-title">Formals</span></div>
+            <div class="category-item"><img src="media/cat-3.webp" alt="Loafers" class="category-circle"><span class="category-title">Loafers</span></div>
+            <div class="category-item"><img src="media/cat-4.webp" alt="Suede" class="category-circle"><span class="category-title">Suede</span></div>
+            <div class="category-item"><img src="media/cat-5.webp" alt="Limited" class="category-circle"><span class="category-title">Limited</span></div>
+            <div class="category-item"><img src="media/cat-6.webp" alt="Sports" class="category-circle"><span class="category-title">Sports</span></div>
+        </div>
+    </section>
+
+    <!-- 2. FEATURED PRODUCTS (4 PRODUCTS) -->
+    <section class="products-section">
+        <div class="section-header">
+            <h2 class="section-title">Featured Collection</h2>
+            <div class="section-subtitle">Handpicked Premium Selection</div>
+        </div>
+
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge accent">Premium Suede</span>
+                    <img src="media/product_1.webp" alt="Men's Suede Air Force 1">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Royal Blue & Mocha Earth</div>
+                    <h3 class="product-title">MEN'S SUEDE AIR FORCE 1</h3>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 5,999</span>
+                    </div>
+                    <button class="add-to-cart-btn">Explore Models</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge">Limited Drop</span>
+                    <img src="media/product_2.webp" alt="Men's Limited Atelier Drops">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Cream Gold Charm & Timberland</div>
+                    <h3 class="product-title">MEN'S LIMITED ATELIER DROPS</h3>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 6,899</span>
+                    </div>
+                    <button class="add-to-cart-btn">Explore Pairs</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge accent">Tactical Edit</span>
+                    <img src="media/product_3.webp" alt="Men's Undefeated Tactical">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Military Olive & Two-Tone</div>
+                    <h3 class="product-title">MEN'S UNDEFEATED TACTICAL</h3>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 6,299</span>
+                    </div>
+                    <button class="add-to-cart-btn">Explore Series</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge">Grail Edition</span>
+                    <img src="media/product_4.webp" alt="Men's Nike SB Dunk Low">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Grey Fog Suede & Blue Wave</div>
+                    <h3 class="product-title">MEN'S NIKE SB DUNK LOW</h3>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 7,299</span>
+                    </div>
+                    <button class="add-to-cart-btn">Explore Edition</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PROMO BANNERS (2 BANNERS - PC SIDE-BY-SIDE / MOBILE STACKED) -->
+    <section class="promo-section">
+        <div class="promo-banner" style="background-image: url('media/promo1.webp');">
+            <div class="promo-content">
+                <h3>MENS SHOES</h3>
+                <button class="promo-btn">Shop Men</button>
+            </div>
+        </div>
+        <div class="promo-banner" style="background-image: url('media/promo2.webp');">
+            <div class="promo-content">
+                <h3>WOMENS SHOES</h3>
+                <button class="promo-btn">Shop Women</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. NEW ARRIVALS (4 PRODUCTS) -->
+    <section class="products-section">
+        <div class="section-header">
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="section-subtitle">Latest Drops & Exclusives</div>
+        </div>
+
+        <div class="product-grid">
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge accent">New Arrival</span>
+                    <img src="media/product_5.webp" alt="MS Air Force 1 Dark">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Earth Tone Atelier</div>
+                    <h3 class="product-title">MS AIR FORCE 1 DARK SUEDE</h3>
+                    <div class="product-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        <span>4.9 (110)</span>
+                    </div>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 6,499</span>
+                        <span class="old-price">Rs. 8,699</span>
+                    </div>
+                    <button class="add-to-cart-btn">Select Size</button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge sale">Viral Drop</span>
+                    <img src="media/product_6.webp" alt="MS Air Force 1 Low">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Collegiate Leather Edition</div>
+                    <h3 class="product-title">MS AIR FORCE 1 LOW PREMIUM</h3>
+                    <div class="product-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <span>5.0 (228)</span>
+                    </div>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 6,299</span>
+                        <span class="old-price">Rs. 8,299</span>
+                    </div>
+                    <button class="add-to-cart-btn">Select Size</button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge">Exclusive</span>
+                    <img src="media/product_7.webp" alt="MS Air Force 1 Washed">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Acid-Wash Pastel Drop</div>
+                    <h3 class="product-title">MS AIR FORCE 1 WASHED SUEDE</h3>
+                    <div class="product-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        <span>4.9 (165)</span>
+                    </div>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 6,699</span>
+                        <span class="old-price">Rs. 8,999</span>
+                    </div>
+                    <button class="add-to-cart-btn">Select Size</button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card">
+                <div class="product-image-box">
+                    <span class="badge sale">Supreme Drop</span>
+                    <img src="media/product_8.webp" alt="MS Air Force 1 Supreme">
+                </div>
+                <div class="product-info">
+                    <div class="product-subtitle">Streetwear Essential Low</div>
+                    <h3 class="product-title">MS AIR FORCE 1 SUPREME EMBOSS</h3>
+                    <div class="product-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        <span>4.9 (189)</span>
+                    </div>
+                    <div class="product-price-row">
+                        <span class="current-price">Rs. 6,999</span>
+                        <span class="old-price">Rs. 9,499</span>
+                    </div>
+                    <button class="add-to-cart-btn">Select Size</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================= PART 3 START ================= -->
+
+    <!-- 1. BRAND STORY SECTION -->
+    <section class="brand-story-section">
+        <div class="story-image-container">
+            <!-- Ensure img tag is properly closed -->
+            <img src="media/about.webp" alt="MSM Premium Craftsmanship">
+            <div class="experience-badge">
+                <h4>Premium</h4>
+                <p>Craftsmanship</p>
+            </div>
+        </div>
+        <div class="story-content">
+            <span class="story-subtitle">The Art of Shoemaking</span>
+            <h2 class="story-title">Crafting Elegance,<br>Step by Step.</h2>
+            <p class="story-description">
+                At MSM Shoes, we believe that every pair of shoes tells a story. From selecting the finest leathers to the final hand-stitched details, our premium footwear is designed for those who appreciate true craftsmanship, unparalleled comfort, and timeless style. Step into a world of luxury and leave a lasting impression.
+            </p>
+            <a href="#" class="story-btn">Discover Our Story</a>
+        </div>
+    </section>
+
+    <!-- 2. TRUST BADGES / FEATURES -->
+    <section class="trust-badges-section">
+        <div class="badges-grid">
+            <!-- Badge 1 -->
+            <div class="badge-item">
+                <i class="fa-solid fa-truck-fast badge-icon"></i>
+                <h4 class="badge-title">Free Shipping</h4>
+                <p class="badge-text">On orders over Rs. 5000</p>
+            </div>
+            <!-- Badge 2 -->
+            <div class="badge-item">
+                <i class="fa-solid fa-medal badge-icon"></i>
+                <h4 class="badge-title">Premium Quality</h4>
+                <p class="badge-text">Finest materials used</p>
+            </div>
+            <!-- Badge 3 -->
+            <div class="badge-item">
+                <i class="fa-solid fa-shield-halved badge-icon"></i>
+                <h4 class="badge-title">Secure Payments</h4>
+                <p class="badge-text">100% secure checkout</p>
+            </div>
+            <!-- Badge 4 -->
+            <div class="badge-item">
+                <i class="fa-solid fa-headset badge-icon"></i>
+                <h4 class="badge-title">24/7 Support</h4>
+                <p class="badge-text">Dedicated customer service</p>
+            </div>
+        </div>
+    </section>
+    <!-- ================= PART 4 START ================= -->
+
+    <!-- 1. CUSTOMER REVIEWS (TESTIMONIALS) -->
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2 class="section-title">Client Experiences</h2>
+            <div class="section-subtitle">What Our Customers Say</div>
+        </div>
+
+        <div class="testi-grid">
+            <div class="testi-card">
+                <i class="fa-solid fa-quote-left quote-icon"></i>
+                <p class="testi-text">"The craftsmanship on the Suede Air Force 1 is unmatched. The leather brown accents look even more premium in person. Highly recommended!"</p>
+                <div class="testi-author">Usman Ali</div>
+                <div class="testi-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+            <div class="testi-card">
+                <i class="fa-solid fa-quote-left quote-icon"></i>
+                <p class="testi-text">"MSM Shoes has redefined my streetwear style. The delivery was fast, and the packaging felt like opening a luxury watch. Will shop again."</p>
+                <div class="testi-author">Fahad Khan</div>
+                <div class="testi-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+            <div class="testi-card">
+                <i class="fa-solid fa-quote-left quote-icon"></i>
+                <p class="testi-text">"I bought the tactical edit sneakers. They are incredibly comfortable for all-day wear and the matte black finish is absolutely perfect."</p>
+                <div class="testi-author">Zainab T.</div>
+                <div class="testi-stars">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. THE MSM PHILOSOPHY (CSS GRAPHICS ONLY) -->
+    <section class="philosophy-section">
+        <div class="philosophy-header">
+            <div class="section-subtitle">The MSM Advantage</div>
+            <h2 class="section-title">Beyond Just Footwear</h2>
+        </div>
+
+        <div class="philosophy-grid">
+            <!-- Box 01 -->
+            <div class="philosophy-card">
+                <div class="bg-number">01</div>
+                <div class="philosophy-content">
+                    <i class="fa-solid fa-gem philosophy-icon"></i>
+                    <div class="philosophy-divider"></div>
+                    <h3 class="philosophy-title">Premium Materials</h3>
+                    <p class="philosophy-desc">We ethically source the highest grade leathers, suedes, and durable outsoles. Every cut and texture is chosen for longevity, breathability, and absolute luxury.</p>
+                </div>
+            </div>
+
+            <!-- Box 02 -->
+            <div class="philosophy-card">
+                <div class="bg-number">02</div>
+                <div class="philosophy-content">
+                    <i class="fa-solid fa-pen-ruler philosophy-icon"></i>
+                    <div class="philosophy-divider"></div>
+                    <h3 class="philosophy-title">Master Craftsmanship</h3>
+                    <p class="philosophy-desc">Combining modern technology with traditional shoemaking techniques. Our detailed stitching and careful finishing ensure your pair looks flawless from every angle.</p>
+                </div>
+            </div>
+
+            <!-- Box 03 -->
+            <div class="philosophy-card">
+                <div class="bg-number">03</div>
+                <div class="philosophy-content">
+                    <i class="fa-solid fa-shoe-prints philosophy-icon"></i>
+                    <div class="philosophy-divider"></div>
+                    <h3 class="philosophy-title">Comfort Engineered</h3>
+                    <p class="philosophy-desc">Style should never compromise comfort. Our sneakers feature custom cushioned insoles and ergonomic designs tailored for all-day urban exploration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================= CONTACT US SECTION ================= -->
+    <section class="contact-section">
+        <div class="section-header">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="section-subtitle">We Are Here To Assist You</div>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Left Side: Store Info -->
+            <div class="contact-info-box">
+                <h3 class="contact-info-title">MSM Footwear Studio</h3>
+                <p class="contact-info-desc">
+                    Have questions regarding sizing, shipping, or custom orders? Reach out to our dedicated support team through any of the channels below.
+                </p>
+                <ul class="contact-detail-list">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Gulshan Colony, Tehsil Taxila, District Rawalpindi, Pakistan</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+92 320 9343453 / +92 315 4426479</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>support@msmshoes.com</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Monday - Saturday: 10:00 AM - 8:00 PKT</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right Side: Contact Form -->
+            <form class="contact-form-box" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent successfully.');">
+                <div class="form-row">
+                    <input type="text" placeholder="Your Name" class="form-input" required>
+                    <input type="email" placeholder="Your Email Address" class="form-input" required>
+                </div>
+                <input type="text" placeholder="Subject / Order ID" class="form-input">
+                <textarea placeholder="Write your message here..." class="form-textarea" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= NEWSLETTER SECTION ================= -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Join The MSM Club</h2>
+        <p class="newsletter-desc">Subscribe to get exclusive access to limited drops, styling tips, and early sales.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+            <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- ================= PREMIUM FOOTER ================= -->
+    <footer class="footer">
+        <div class="footer-grid">
+            
+            <!-- Column 1: Brand Info -->
+            <div class="footer-col">
+                <div class="footer-logo-text">MSM</div>
+                <div class="footer-logo-sub">PREMIUM SHOES</div>
+                <p class="footer-about">
+                    Crafting elegance and defining modern streetwear. MSM Shoes brings you premium footwear designed with master craftsmanship and ultimate comfort.
+                </p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Shop Collection</h4>
+                <ul class="footer-links">
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Premium Sneakers</a></li>
+                    <li><a href="#">Classic Formals</a></li>
+                    <li><a href="#">Suede Editions</a></li>
+                    <li><a href="#">Limited Drops</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Customer Care -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Customer Care</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Track Your Order</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Shoe Size Guide</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Contact Info (Footer Summary) -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Quick Support</h4>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Taxila, Rawalpindi, Pakistan</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+92 320 9343453</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>support@msmshoes.com</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom: Copyright & Payments -->
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2026 MSM Shoes. All Rights Reserved. Designed for Premium Comfort.
+            </div>
+            <div class="payment-icons">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <span class="pay-badge">NayaPay</span>
+                <span class="pay-badge">Easypaisa</span>
+                <span class="pay-badge">JazzCash</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= PART 4 END ================= -->
+
+    <!-- ================= PART 3 END ================= -->
+    
+    <!-- ================= PART 2 END ================= -->
+
+    <!-- ================= PART 5 START ================= -->
+
+    <!-- 1. NEWSLETTER SECTION -->
+    <section class="newsletter-section">
+        <h2 class="newsletter-title">Join The MSM Club</h2>
+        <p class="newsletter-desc">Subscribe to get exclusive access to limited drops, styling tips, and early sales.</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- 2. PREMIUM FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            
+            <!-- Column 1: Brand Info -->
+            <div class="footer-col">
+                <div class="footer-logo-text">MSM</div>
+                <div class="footer-logo-sub">PREMIUM SHOES</div>
+                <p class="footer-about">
+                    Crafting elegance and defining modern streetwear. MSM Shoes brings you premium footwear designed with master craftsmanship and ultimate comfort.
+                </p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Shop Collection</h4>
+                <ul class="footer-links">
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Premium Sneakers</a></li>
+                    <li><a href="#">Classic Formals</a></li>
+                    <li><a href="#">Suede Editions</a></li>
+                    <li><a href="#">Limited Drops</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Customer Care -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Customer Care</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Track Your Order</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Shoe Size Guide</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Contact Info -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Get In Touch</h4>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>MSM Footwear Studio,<br>Pakistan</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+92 300 0000000</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>support@msmshoes.com</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer Bottom: Copyright & Payments -->
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2026 MSM Shoes. All Rights Reserved. Designed for Premium Comfort.
+            </div>
+            <div class="payment-icons">
+                <i class="fa-brands fa-cc-visa"></i>
+                <i class="fa-brands fa-cc-mastercard"></i>
+                <!-- Text badges for local Pakistani payment methods -->
+                <span class="pay-badge">NayaPay</span>
+                <span class="pay-badge">Easypaisa</span>
+                <span class="pay-badge">JazzCash</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= PART 5 END ================= -->
+    <!-- JAVASCRIPT -->
+    <script>
+        // Drawer Variables
+        const overlay = document.getElementById('drawerOverlay');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const cartDrawer = document.getElementById('cartDrawer');
+        const searchBar = document.getElementById('searchBar');
+
+        function closeAllDrawers() {
+            mobileMenu.classList.remove('active');
+            cartDrawer.classList.remove('active');
+            overlay.classList.remove('active');
+            searchBar.classList.remove('active');
+        }
+
+        function toggleMenu() {
+            cartDrawer.classList.remove('active'); 
+            searchBar.classList.remove('active'); 
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function toggleCart() {
+            mobileMenu.classList.remove('active'); 
+            searchBar.classList.remove('active'); 
+            cartDrawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function toggleSearch() {
+            mobileMenu.classList.remove('active'); 
+            cartDrawer.classList.remove('active'); 
+            overlay.classList.remove('active'); 
+            searchBar.classList.toggle('active');
+        }
+
+        // ================= FADE SLIDER LOGIC =================
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let slideTimer;
+
+        // Function to show a specific slide
+        function showSlide(index) {
+            // Remove active classes from all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Set new index
+            slideIndex = index;
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
+
+            // Add active class to current slide and dot
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+
+        // Function for auto-play
+        function nextSlide() {
+            showSlide(slideIndex + 1);
+        }
+
+        // Function when clicking on a dot manually
+        function currentSlide(index) {
+            showSlide(index);
+            // Reset timer so it doesn't instantly change after clicking
+            clearInterval(slideTimer);
+            slideTimer = setInterval(nextSlide, 4500);
+        }
+
+        // Auto slide every 4.5 seconds
+        slideTimer = setInterval(nextSlide, 4500);
+    </script>
+    
+    
+</body>
+</html>
